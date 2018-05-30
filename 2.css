@@ -1,0 +1,63 @@
+.canvas-container {
+	width: 100%;
+	max-width: 100%;
+}
+
+.canvas {
+	width: 100%;
+	display: flex;
+	flex-direction: row;
+	justify-content: space-between;
+}
+
+.canvas__editor, .canvas__field, .canavs, .canvas-container {
+	box-sizing: border-box;
+}
+
+.canvas__editor {
+	max-width: 300px;
+	min-width: 260px;
+	width: 35%;
+	padding: 30px;
+	border-right: 2px solid grey;
+}
+.canvas__editor>* {
+	box-sizing: border-box;
+	width: 100%;
+}
+
+.canvas__field {
+	min-width: 65%;
+	width: auto;
+	padding: 30px;
+}
+
+.field__point {
+	position: absolute;
+	cursor: move;
+}
+
+.to-child {
+	display: block;
+	margin-left: auto;
+	margin-right: auto;
+	width: 50px;
+}
+
+.field__point {
+	padding: 8px;
+	background: rgb(250,250,250);
+	border-radius: 7px;
+	max-width: 200px;
+}
+
+.arrows {
+	z-index: -1;
+	height: 100%;
+	width: 100%;
+	position: absolute;
+}
+
+.point-editor {
+	margin-bottom: 100px;
+}

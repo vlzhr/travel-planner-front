@@ -1,0 +1,82 @@
+body {
+	margin: 0px;
+}
+
+section {
+	max-width: 940px;
+	margin: 0px auto;
+}
+
+body * {
+	font-size: 18px;
+	font-family: 'Roboto', sans-serif;
+}
+
+.container {
+	box-sizing: border-box;
+	width: 100%;
+	padding: 100px 40px;
+}
+
+input, li, button {
+	box-sizing: border-box;
+	border: 1px solid grey;
+}
+input, li, textarea {
+	padding: 10px;
+	border-radius: 8px;
+	width: 80%;
+}
+
+button {
+	transition: background .4s;
+	cursor: pointer;
+	padding: 5px;
+	border-radius: 5px;
+	font-size: 15px;
+	width: 200px;
+}
+button:hover {
+	background: rgba(100, 240, 200, .8);
+}
+.container .add-project-but {
+	margin-left: -230px;
+}
+
+li {
+	border: 0px;
+	border-bottom: 1px solid grey;
+	transition: background .4s;
+	cursor: pointer;
+	list-style-type: none;
+	display: flex;
+	justify-content: space-between;
+}
+li:hover {
+	background: rgba(200, 200, 200, .8);
+}
+li>button {
+	display: none;
+}
+.del-button {
+	box-sizing: border-box;
+	width: 100px;
+	padding: 3px;
+	font-size: 12px;
+	margin-left: -110px;
+}
+.del-button:hover {
+	background: rgba(240, 100, 200, .8);
+}
+li:hover>button {
+	display: block;
+}
+
+h1 {
+	font-size: 25px;
+}
+
+p {
+	font-weight: 300;
+	margin-bottom: 100px;
+}
