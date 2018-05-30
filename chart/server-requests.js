@@ -5,7 +5,7 @@ function makeRequest(args, then) {
     xhr.open('GET', link, true);
 
     xhr.onreadystatechange = () => {
-        if (xhr.readyState !== 4) return;
+        if (xhr.readyState !== 4) return "loser";
 
         if (xhr.status !== 200) {
             console.log(xhr.statusText);
@@ -19,7 +19,15 @@ function makeRequest(args, then) {
 
 function loadPoints(pid) {
     pid = pid ? pid : 3;
-    makeRequest(`load_project?id=${pid}`, drawPoints);
+    makeRequest(`load_project?id=${pid}`, function (data) {
+        for (let pointId in data['points']) {
+            const point = data['points'][pointId];
+            if (point.hasOwnProperty("iata")) {
+                iataCodes[pointId] = point["iata"];
+            }
+        }
+        drawPoints(data);
+    });
 }
 
 function onPointDrag(event) {
@@ -46,6 +54,11 @@ function drawPoint(point) {
 function drawConnection(from, to) {
     instance.connect({uuids: ["chartWindow" + from + "-bottom",
         "chartWindow" + to + "-top" ], overlays: overlays});
+    // loadDest(arrowsss[1], arrowsss[2], (data) => {
+    //     const id = "jsPlumb_2_" + arrowsss[0];
+    //     console.log(id);
+    //     document.querySelector("#" + id).innerText = data["distance"];
+    // });
 }
 
 function drawConnections(point) {
@@ -80,7 +93,7 @@ function uploadChild(parent, title) {
         newPoint["id"] = newPointID;
         drawPoint(newPoint);
         prepareJSPlumb();
-        drawConnection(parent, newPoint["id"]);
+        loadDest(parent, newPoint["id"], function() {drawConnection(parent, newPoint["id"])});
     });
 }
 
@@ -94,7 +107,36 @@ function removePoint(pointID) {
 }
 
 function changePoint(pointID, title) {
+    document.querySelector("#chartWindow"+pointID).innerText = title;
     makeRequest("/save_point?pid="+projectID+"&id="+pointID+"&desc=&title="+title, ()=>{});
+}
+
+function addToDests(fr, to, result) {
+    if (!dests.hasOwnProperty(fr)) {
+        dests[fr] = {};
+    }
+    dests[fr][to] = result;
+
+    return result;
+}
+
+function loadDest(fr, to, then) {
+    if (!(iataCodes.hasOwnProperty(fr) && iataCodes.hasOwnProperty(to))) {
+
+        then( addToDests(fr, to, { "distance": 0, "price": 0 }) );
+    } else {
+
+        makeRequest("get_dest?from=" + iataCodes[fr] + "&to=" + iataCodes[to], (data) => {
+            console.log(data);
+            const a = addToDests(fr, to, data);
+            then( a );
+
+        });
+    }
+}
+
+function newIata(id, code, then) {
+    makeRequest("new_iata?pid="+projectID+"&id="+id+"&code="+code, then);
 }
 
 

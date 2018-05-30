@@ -12,6 +12,21 @@ function prepareJSPlumb() {
             EndpointHoverStyle: {fill: "#ec9f2e"},
             Container: "canvas"
         });
+
+        instance.bind("connection", function(connection) {
+            const c = connection;
+            connection = connection.connection;
+            const arrowsss = [0, connection.sourceId.slice(11), connection.targetId.slice(11)];
+            loadDest(arrowsss[1], arrowsss[2], (data) => {
+                console.log(data);
+                if (data['distance']) {
+                    const text = String(data["distance"]) + "km<br>" + String(data["price"]) + "rub";
+                    connection.addOverlay([ "Label", { label: text}]);
+                }
+
+            });
+        });
+
     }
 
     instance.batch(function () {

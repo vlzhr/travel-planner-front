@@ -1,3 +1,6 @@
+const iataCodes = {};
+const dests = {};
+
 function makeAviasalesRequest(q, then) {
     const link = "http://autocomplete.travelpayouts.com/places2?term=" + q + "&locale=ru,en&types[]=city"
     console.log(link);
