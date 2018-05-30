@@ -11,7 +11,11 @@ function drawAuth() {
 	VK.Widgets.Auth('vk_auth', {"onAuth": onAuth});
 	section.innerHTML = `
 	<div class="container">
-		<h1>Добро пожаловать на Travel Planner!</h1>
+		<header>
+			<h1>Travel Planner</h1>
+			<p>Простой способ создания маршрута с учетом инетересов всех участников</p>
+		</header>
+		
 		<h2>Авторизуйтесь через VK</h2>
 		<div id="vk_auth"></div>
 		или
@@ -25,4 +29,4 @@ window.onload = () => {
 
 	getCookie("ui") ? makeRequest(`load_uprojects?id=${getCookie("ui")}`, drawProjects) : drawAuth();
 
-}
+};

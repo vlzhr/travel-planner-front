@@ -4,6 +4,7 @@
 }
 
 .canvas {
+	background: rgb(250, 250, 252);
 	width: 100%;
 	display: flex;
 	flex-direction: row;
@@ -45,10 +46,14 @@
 }
 
 .field__point {
-	padding: 8px;
-	background: rgb(250,250,250);
-	border-radius: 7px;
+	box-shadow: 1px 3px rgba(240, 240, 250, 0.5);
+	padding: 20px;
+	background: #ffffff;
+	border-radius: 30px;
 	max-width: 200px;
+}
+.field__point h3 {
+	margin-top: 0px;
 }
 
 .arrows {

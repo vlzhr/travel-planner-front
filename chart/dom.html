@@ -1,0 +1,51 @@
+<!doctype html>
+<html>
+    <head>
+
+        <title>jsPlumb - chart demonstration</title>
+        <meta http-equiv="content-type" content="text/html;charset=utf-8" />
+        <meta name="viewport" content="width=device-width, initial-scale=1, minimum-scale=1, maximum-scale=1, user-scalable=no"/>
+        <link href="//netdna.bootstrapcdn.com/font-awesome/4.0.3/css/font-awesome.css" rel="stylesheet">
+        <link href="//fonts.googleapis.com/css?family=Lato:400,700" rel="stylesheet">
+
+        <link rel="stylesheet" href="jsplumbtoolkit-defaults.css">
+        <link rel="stylesheet" href="jsplumbtoolkit-demo.css">
+        <link rel="stylesheet" href="demo.css">
+    </head>
+    <body data-demo-id="chart">
+
+        <div class="change-form" style="display: none">
+            <input type="text" class="change-form__input" placeholder="content">
+            <button onclick="changeWindowContent()">change</button>
+            <br><br>
+            <input type="text" class="change-form__add-connection" placeholder="connection">
+            <button onclick="addConnection()">change</button>
+        </div>
+
+        <div class="jtk-demo-main">
+            <div class="jtk-demo-canvas canvas-wide chart-demo jtk-surface jtk-surface-nopan" id="canvas">
+                <div class="window" id="chartWindow1">window one</div>
+                <div class="window" id="chartWindow2">window two</div>
+                <div class="window" id="chartWindow3">window three</div>
+                <div class="window" id="chartWindow4">window four</div>
+                <div class="window" id="chartWindow5">window five</div>
+                <div class="window" id="chartWindow6">window six</div>
+            </div>
+
+            <div class="description">
+                <h4>Travel Planner</h4>
+                <p>Передвигайте точки графа, чтобы спланировать путешествие!</p>
+            </div>
+
+        </div>
+
+        <script src="jsplumb.min.js"></script>
+
+        <script src="my.js"></script>
+
+		<script src="demo.js"></script>
+
+
+
+    </body>
+</html>
