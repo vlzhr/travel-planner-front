@@ -32,6 +32,10 @@ function addChild() {
     uploadChild(selectedWindowID, addChildInput.value);
 }
 
+function delPoint() {
+    removePoint(selectedWindowID);
+}
+
 function getArrowText(connection) {
     console.log(connection);
     console.log(connection.component.sourceId + " -> " + connection.component.targetId);;

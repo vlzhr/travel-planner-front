@@ -22,6 +22,14 @@ function loadPoints(pid) {
     makeRequest(`load_project?id=${pid}`, drawPoints);
 }
 
+function onPointDrag(event) {
+    // console.log(event.el);
+    const pointID = event.el.id.slice(11);
+    const x = event.el.style.left.slice(0, event.el.style.left.length-2);
+    const y = event.el.style.top.slice(0, event.el.style.top.length-2);
+    makeRequest("replace_point?pid="+projectID+"&id="+pointID+"&x="+x+"&y="+y, ()=>{})
+}
+
 function drawPoint(point) {
     const newWindow = document.createElement("div");
     newWindow.classList.add("window");
@@ -30,14 +38,12 @@ function drawPoint(point) {
     newWindow.innerText = point["title"];
     newWindow.style.top = point["y"] + "px";
     newWindow.style.left = point["x"] + "px";
-    newWindow.addEventListener("click", function (event) { showChangePanel(event.target.id.slice(11)); });
-    newWindow.addEventListener("dragend", function (event) { console.log(event) });
+    newWindow.ondrag = onPointDrag;
+    newWindow.addEventListener("click", function(event) { showChangePanel(event.target.id.slice(11)); });
     document.querySelector(".chart-demo").appendChild(newWindow);
 }
 
 function drawConnection(from, to) {
-    console.log(from);
-    console.log(to);
     instance.connect({uuids: ["chartWindow" + from + "-bottom",
         "chartWindow" + to + "-top" ], overlays: overlays});
 }
@@ -75,6 +81,15 @@ function uploadChild(parent, title) {
         drawPoint(newPoint);
         prepareJSPlumb();
         drawConnection(parent, newPoint["id"]);
+    });
+}
+
+function removePoint(pointID) {
+    makeRequest("/del_point?pid="+projectID+"&id="+pointID, function() {
+        //document.querySelector("#chartWindow" + pointID).remove();
+        // [...document.querySelectorAll(".chartWindow")].forEach(x=>x.remove());
+        // loadPoints(projectID);
+        location.reload();
     });
 }
 

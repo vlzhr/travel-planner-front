@@ -2,20 +2,24 @@ function prepareJSPlumb() {
 
     const color = "#cce";
 
-    instance = jsPlumb.getInstance({
-        Connector: [ "Bezier", { curviness: 50 } ],
-        DragOptions: { cursor: "pointer", zIndex: 2000 },
-        PaintStyle: { stroke: color, strokeWidth: 2 },
-        EndpointStyle: { radius: 1, fill: color },
-        HoverPaintStyle: {stroke: "#ec9f2e" },
-        EndpointHoverStyle: {fill: "#ec9f2e" },
-        Container: "canvas"
-    });
+    if (!instance) {
+        instance = jsPlumb.getInstance({
+            Connector: ["Bezier", {curviness: 50}],
+            DragOptions: {cursor: "pointer", zIndex: 2000, stop: onPointDrag},
+            PaintStyle: {stroke: color, strokeWidth: 2},
+            EndpointStyle: {radius: 1, fill: color},
+            HoverPaintStyle: {stroke: "#ec9f2e"},
+            EndpointHoverStyle: {fill: "#ec9f2e"},
+            Container: "canvas"
+        });
+    }
 
     instance.batch(function () {
 
-        const windows = jsPlumb.getSelector(".chart-demo .window.fresh");
+        const windows = jsPlumb.getSelector(".chart-demo .fresh");
         for (let i = 0; i < windows.length; i++) {
+            console.log("deleting fresh");
+            console.log(windows[i].getAttribute("id"));
             windows[i].classList.remove("fresh");
             instance.addEndpoint(windows[i], {
                 uuid: windows[i].getAttribute("id") + "-bottom",
@@ -34,4 +38,7 @@ function prepareJSPlumb() {
     });
 
     jsPlumb.fire("jsPlumbDemoLoaded", instance);
+    jsPlumb.bind('dragging',function(info,ev){
+        onPointDrag();
+    });
 }
