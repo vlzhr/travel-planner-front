@@ -20,16 +20,19 @@
             <br><br>
             <input type="text" class="change-form__add-connection" placeholder="connection">
             <button onclick="addConnection()">change</button>
+            <<br><br>
+            <input type="text" class="change-form__add-child" placeholder="add child">
+            <button onclick="addChild()">change</button>
         </div>
 
         <div class="jtk-demo-main">
             <div class="jtk-demo-canvas canvas-wide chart-demo jtk-surface jtk-surface-nopan" id="canvas">
-                <div class="window" id="chartWindow1">window one</div>
+                <!--<div class="window" id="chartWindow1">window one</div>
                 <div class="window" id="chartWindow2">window two</div>
                 <div class="window" id="chartWindow3">window three</div>
                 <div class="window" id="chartWindow4">window four</div>
                 <div class="window" id="chartWindow5">window five</div>
-                <div class="window" id="chartWindow6">window six</div>
+                <div class="window" id="chartWindow6">window six</div>-->
             </div>
 
             <div class="description">
@@ -45,7 +48,11 @@
 
 		<script src="demo.js"></script>
 
+        <script src="server-requests.js"></script>
 
+        <script>
+            loadPoints();
+        </script>
 
     </body>
 </html>

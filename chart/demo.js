@@ -1,10 +1,8 @@
-jsPlumb.ready(function () {
+function prepareJSPlumb() {
 
-    var color = "#cce";
+    const color = "#cce";
 
     instance = jsPlumb.getInstance({
-        // notice the 'curviness' argument to this Bezier curve.  the curves on this page are far smoother
-        // than the curves on the first demo, which use the default curviness value.
         Connector: [ "Bezier", { curviness: 50 } ],
         DragOptions: { cursor: "pointer", zIndex: 2000 },
         PaintStyle: { stroke: color, strokeWidth: 2 },
@@ -14,21 +12,11 @@ jsPlumb.ready(function () {
         Container: "canvas"
     });
 
-    // suspend drawing and initialise.
     instance.batch(function () {
-        // declare some common values:
-        var arrowCommon = { foldback: 0.7, fill: color, width: 14 },
-        // use three-arg spec to create two different arrows with the common values:
-            overlays = [
-                [ "Arrow", { location: 0.7 }, arrowCommon ],
-                [ "Label", { label: getArrowText} ]/*,
-                [ "Arrow", { location: 0.3, direction: -1 }, arrowCommon ]*/
-            ];
-        // add endpoints, giving them a UUID.
-        // you DO NOT NEED to use this method. You can use your library's selector method.
-        // the jsPlumb demos use it so that the code can be shared between all three libraries.
-        var windows = jsPlumb.getSelector(".chart-demo .window");
-        for (var i = 0; i < windows.length; i++) {
+
+        const windows = jsPlumb.getSelector(".chart-demo .window.fresh");
+        for (let i = 0; i < windows.length; i++) {
+            windows[i].classList.remove("fresh");
             instance.addEndpoint(windows[i], {
                 uuid: windows[i].getAttribute("id") + "-bottom",
                 anchor: "Bottom",
@@ -41,15 +29,9 @@ jsPlumb.ready(function () {
             });
         }
 
-        instance.connect({uuids: ["chartWindow3-bottom", "chartWindow6-top" ], overlays: overlays, detachable: true, reattach: true});
-        instance.connect({uuids: ["chartWindow1-bottom", "chartWindow2-top" ], overlays: overlays});
-        instance.connect({uuids: ["chartWindow1-bottom", "chartWindow4-top" ], overlays: overlays});
-        instance.connect({uuids: ["chartWindow2-bottom", "chartWindow4-top" ], overlays: overlays});
-        instance.connect({uuids: ["chartWindow2-bottom", "chartWindow5-top" ], overlays: overlays});
-
         instance.draggable(windows);
 
     });
 
     jsPlumb.fire("jsPlumbDemoLoaded", instance);
-});
+}
