@@ -93,3 +93,8 @@ function removePoint(pointID) {
     });
 }
 
+function changePoint(pointID, title) {
+    makeRequest("/save_point?pid="+projectID+"&id="+pointID+"&desc=&title="+title, ()=>{});
+}
+
+

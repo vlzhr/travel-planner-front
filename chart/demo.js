@@ -18,8 +18,6 @@ function prepareJSPlumb() {
 
         const windows = jsPlumb.getSelector(".chart-demo .fresh");
         for (let i = 0; i < windows.length; i++) {
-            console.log("deleting fresh");
-            console.log(windows[i].getAttribute("id"));
             windows[i].classList.remove("fresh");
             instance.addEndpoint(windows[i], {
                 uuid: windows[i].getAttribute("id") + "-bottom",
@@ -38,7 +36,4 @@ function prepareJSPlumb() {
     });
 
     jsPlumb.fire("jsPlumbDemoLoaded", instance);
-    jsPlumb.bind('dragging',function(info,ev){
-        onPointDrag();
-    });
 }

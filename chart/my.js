@@ -7,7 +7,7 @@ let instance;
 const arrowCommon = { foldback: 0.7, fill: "red", width: 14 };
 let overlays =
         [[ "Arrow", { location: 0.7 }, arrowCommon ],
-        [ "Label", { label: "new"} ]];
+        [ "Label", { label: getArrowText} ]];
 
 
 function showChangePanel( windowID ) {
@@ -20,6 +20,7 @@ function changeWindowContent() {
     const text = changeInput.value;
     document.querySelector("#chartWindow"+selectedWindowID).innerText = text;
     document.querySelector(".change-form").style.display = "none";
+    changePoint(selectedWindowID, changeInput.value);
 }
 
 function addConnection() {
@@ -28,7 +29,12 @@ function addConnection() {
     addConnectionInput.value = "";
 }
 
+function showCityChoicePanel(data, then) {
+
+}
+
 function addChild() {
+    searchCities(addChildInput.value, (data) => showCityChoicePanel(data, (city) => { uploadChild(selectedWindowID, city) }));
     uploadChild(selectedWindowID, addChildInput.value);
 }
 
