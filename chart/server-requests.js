@@ -18,7 +18,7 @@ function makeRequest(args, then) {
 }
 
 function loadPoints(pid) {
-    pid = pid ? pid : 3;
+    pid = pid ? pid : projectID;
     makeRequest(`load_project?id=${pid}`, function (data) {
         for (let pointId in data['points']) {
             const point = data['points'][pointId];
@@ -83,8 +83,6 @@ function drawPoints(data) {
 }
 
 
-
-let projectID = 3;
 function uploadChild(parent, title) {
     makeRequest("/add_child?pid="+projectID+"&parent_id="+parent+"&title="+title+
     "&desc=", function(data) {

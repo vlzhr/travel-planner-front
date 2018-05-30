@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Choose project!</title>
+    <script src="cookie.js"></script>
+    <style>
+        body {
+            margin: 0px;
+            font-family: 'Open Sans', sans-serif;
+            background: #DE6262;  /* fallback for old browsers */
+            background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+            background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+            background-size: cover;
+        }
+        section {
+            max-width: 500px;
+            padding: 35px ;
+            margin: 20px auto;
+        }
+        h1 {
+            color: #07234E;
+            margin-bottom: 5px;
+        }
+        .subtitle {
+            color: rgba(7, 35, 78, 0.8);
+            margin-bottom: 30px;
+        }
+        .projects, .new-project {
+            width: 400px;
+            padding: 30px;
+            border: dotted #83b8a8 1px;
+            margin: 20px auto;
+            border-radius: 20px;
+            color: #07234E;
+        }
+        .project {
+            margin: 8px 0px;
+        }
+        .project:hover {
+            color: #83b8a8;
+            cursor: pointer;
+        }
+        .new-project {
+            color: #07234E;
+        }
+        .new-project button, .new-project input {
+            background: #f4f5ef;
+            padding: 10px;
+            border-radius: 10px;
+            border: dotted #83b8a8 1px;
+        }
+        .new-project input {
+
+        }
+    </style>
+</head>
+<body>
+    <section>
+        <h1>Choose the project</h1>
+        <div class="subtitle">
+            You are able to work in the following fields:
+        </div>
+        <div class="projects">
+
+        </div>
+        <div class="new-project">
+            although you may create new project: <br><br><div><input placeholder="project's name" type="text" class="project-field">
+            <button onclick="createProject()">go!</button></div>
+        </div>
+    </section>
+</body>
+<script>
+    function chooseProject(pid) {
+        document.cookie = "pid="+pid;
+        location = "chart/dom.html";
+    }
+    function createProject() {
+        makeRequest("add_project?ui="+getCookie("ui")+"&name="+document.querySelector(".project-field").value, (data) => {
+            document.cookie = "pid="+data[data.length-1]["id"];
+            location = "chart/dom.html";
+        });
+    }
+
+    const projectsList = document.querySelector(".projects");
+    makeRequest("load_uprojects?id="+getCookie("ui"), (data) => {
+        data.forEach(p => {
+            if (!p["name"]) { return }
+            projectsList.innerHTML += '<div onclick="chooseProject(' + p['id'] + ')" class="project">' + p["name"] + '</div>';
+        });
+        console.log(data);
+    });
+    document.querySelector("body").style.height = window.innerHeight + "px";
+</script>
+</html>

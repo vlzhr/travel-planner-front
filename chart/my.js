@@ -1,4 +1,5 @@
 let selectedWindowID = 0;
+let projectID = getCookie("pid");
 const changeForm = document.querySelector(".change-form");
 const changeInput = document.querySelector(".change-form__input");
 const addConnectionInput = document.querySelector(".change-form__add-connection");
@@ -12,6 +13,13 @@ let overlays =
         [[ "Arrow", { location: 0.7 }, arrowCommon ]/*,
         [ "Label", { label: getArrowText }]*/];
 
+
+function getCookie(name) {
+    var matches = document.cookie.match(new RegExp(
+        "(?:^|; )" + name.replace(/([\.$?*|{}\(\)\[\]\\\/\+^])/g, '\\$1') + "=([^;]*)"
+    ));
+    return matches ? decodeURIComponent(matches[1]) : undefined;
+}
 
 function showChangePanel( windowID ) {
     changeForm.style.display = "block";

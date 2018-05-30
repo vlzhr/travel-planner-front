@@ -6,7 +6,7 @@
 	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;subset=cyrillic" rel="stylesheet">
 	<script src="cookie.js"></script>
 	<script src="https://vk.com/js/api/openapi.js?150" type="text/javascript"></script>
-	<script src="all.js">/* changeSection */</script>
+	<!--<script src="all.js">/* changeSection */</script>
 	<script src="field.js">/* --canvasFunctions */</script> 
 	<script src="vk.js">/* --vkFoo */</script> 
 	<script src="0.js">/* onLoaded */</script>
@@ -14,14 +14,94 @@
 	<script src="2.js">/* onProjectChoice */</script> 
 	<script src="3.js">/* --pointChanges */</script> 
 	<link rel="stylesheet" href="1.css">
-	<link rel="stylesheet" href="2.css">
+	<link rel="stylesheet" href="2.css">-->
+	<style>
+		body {
+			margin: 0px;
+			font-family: 'Open Sans', sans-serif;
+			background: #DE6262;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			background-size: cover;
+		}
+		section {
+			max-width: 500px;
+			padding: 35px ;
+			margin: 20px auto;
+		}
+		h1 {
+			color: #07234E;
+			margin-bottom: 5px;
+		}
+		.subtitle {
+			color: rgba(7, 35, 78, 0.8);
+			margin-bottom: 30px;
+		}
+
+		.wo-auth, .about-auth {
+			color: #07234E;
+			margin-bottom: 30px;
+		}
+		.wo-auth a {
+			/*text-decoration: none;*/
+			color: #333333;
+		}
+		.wo-auth a:hover {
+			color: #83b8a8;
+		}
+		.image-view {
+			width: 300px;
+			padding: 5px;
+			border: dotted #83b8a8 1px;
+			margin: 20px auto;
+			border-radius: 20px;
+		}
+		img {
+			border-radius: 20px;
+			width: 300px;
+		}
+		#vk_auth {
+			width: 300px;
+			margin: 10px auto;
+		}
+
+	</style>
 </head>
 <body>
 	
 	<section>
 
+		<h1>Travel Planner</h1>
+		<div class="subtitle">
+			Make your trip route discussions visually clear. Use the chart.
+		</div>
+
+		<div class="image-view">
+			<img src="screen.png" alt="screen">
+		</div>
+		
+		<div class="wo-auth">
+			Try it without registration: <a href="javascript: onAuth()">let's start!</a>
+		</div>
+		<div class="about-auth">
+			Or login and do it together with your trip partners! Just use the VK form below:
+			<div id="vk_auth"></div>
+		</div>
+
 	</section>
 
-	
 </body>
+<script>
+    function onAuth(req={"uid": 0, "first_name": "Неизвестный", "last_name": "Посетитель", "photo": "https://png.icons8.com/dotty/50/000000/administrator-male.png"}) {
+        document.cookie = "ui="+req.uid;
+        document.cookie = "first_name="+req.first_name;
+        document.cookie = "last_name="+req.last_name;
+        document.cookie = "photo="+req.photo;
+
+		location = "choose-project.html";
+    }
+    document.querySelector("body").style.height = window.innerHeight + "px";
+    VK.init({ apiId: 5847252 });
+    VK.Widgets.Auth('vk_auth', {"onAuth": onAuth});
+</script>
 </html>
