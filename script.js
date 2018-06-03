@@ -25,7 +25,7 @@ function closeRules() {
 
 const rulesMessage = document.createElement("div");
 rulesMessage.classList.add("rules-message");
-rulesMessage.innerHTML = "<p>Нажмите на кнопку Старт, чтобы крутить указатель, а затем выберите удачный момент и нажмите на стрелку: она остановится на призе, который Вам достнется!</p><p>Желаем удачи.</p>";
+rulesMessage.innerHTML = "<p>Нажмите на кнопку Go, чтобы крутить указатель, а затем выберите удачный момент и нажмите на стрелку: она остановится на призе, который Вам достнется!</p><p>Желаем удачи.</p>";
 const rulesCloser = document.createElement("div");
 rulesCloser.classList.add("rules-closer");
 rulesMessage.appendChild(rulesCloser);
@@ -35,6 +35,19 @@ closeText.innerText = "Ясно! Поехали";
 rulesMessage.appendChild(closeText);
 rulesMessage.addEventListener("click", closeRules);
 closeText.addEventListener("click", closeRules);
+
+const rulesMessage1 = document.createElement("div");
+rulesMessage1.classList.add("rules-message");
+rulesMessage1.innerHTML = "<p>Поздравляем с выигрышем!</p><p>Чтобы забрать приз, напишите организатору.</p>";
+const rulesCloser1 = document.createElement("div");
+rulesCloser1.classList.add("rules-closer");
+rulesMessage1.appendChild(rulesCloser1);
+// const closeText1 = document.createElement("div");
+// closeText1.classList.add("close-text");
+// closeText1.innerText = "Ясно! Поехали";
+//rulesMessage1.appendChild(closeText);
+rulesMessage1.addEventListener("click", closeRules);
+// closeText1.addEventListener("click", closeRules);
 
 
 function afterPromises (items, win_n) {
@@ -61,6 +74,7 @@ function afterPromises (items, win_n) {
             window.setTimeout(function () {
                 /*document.querySelector(".win-message").innerHTML = "<span class='mes'>Вы выиграли этот приз! Напишите организатору, чтобы забрать его.</span>"
                 document.querySelector(".win-message").style.display = "block";*/
+                playground.appendChild(rulesMessage1);
             }, 2000);
         }, interval * 1000 + 1000);
     };
@@ -81,7 +95,7 @@ function afterPromises (items, win_n) {
 
 function alreadyMessage(val) {
     const message = document.createElement("div.already-message");
-    message.innerHTML = "Вы уже выиграли: <img src='/prizes/" + val + ".png' alt='выигрыш'>";
+    message.innerHTML = "Напишите организатору, чтобы забрать приз. Вы уже выиграли: <br><br><img src='" + val + "' alt='выигрыш'>";
     try {
         document.querySelector("p").remove();
     } catch (e) {
