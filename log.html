@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Download data</title>
+    <script src="server_requests.js"></script>
+    <script>
+
+        function download(filename, text) {
+            var element = document.createElement('a');
+            element.setAttribute('href', 'data:text/plain;charset=utf-8,' + encodeURIComponent(text));
+            element.setAttribute('download', filename);
+
+            element.style.display = 'none';
+            document.body.appendChild(element);
+
+            element.click();
+
+            document.body.removeChild(element);
+        }
+
+        function downloadData() {
+
+            loadHistory().then( data => {
+                const li = [];
+                li.push( ["Social Link", "Lottery Number", "Prize", "Contact?"].join(";") );
+                data.split("<br>").forEach( x => {
+                    /*console.log(x);
+                    console.log(x.split(" "));*/
+                    li.push( ["", x.split("\t")[0], x.split("\t")[1], ""].join(";") )
+                });
+                download("data.csv", li.join("\n"));
+            });
+
+        }
+
+        downloadData();
+
+    </script>
+</head>
+<body>
+
+</body>
+</html>

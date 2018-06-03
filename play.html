@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Global site tag (gtag.js) - Google Analytics -->
+    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48015212-10"></script>
+    <script>
+        window.dataLayer = window.dataLayer || [];
+        function gtag(){dataLayer.push(arguments);}
+        gtag('js', new Date());
+
+        gtag('config', 'UA-48015212-10');
+    </script>
+
+
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=2.0">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+    <title>Розыгрыш призов для участников GiveAway</title>
+    <script src="server_requests.js"></script>
+    <script src="script.js"></script>
+    <script src="items_to_elements.js"></script>
+    <link rel="stylesheet" href="style.css">
+    <link rel="stylesheet" href="page-style.css">
+    <link rel="stylesheet" href="index-style.css">
+</head>
+<body>
+<section>
+    <header>
+        <div class="shares">
+            <div class="share-button"><a href="https://www.facebook.com/leobabybrand/"><i class="fa fa-facebook"></i></a></div>
+            <div class="share-button"><a href="https://vk.com/vk.leobaby"><i class="fa fa-vk"></i></a></div>
+            <div class="share-button"><a href="https://www.instagram.com/leobabyshop"><i class="fa fa-instagram"></i></a></div>
+            <img class="share-button" style="width:20px" src="images-1/logo.jpg" onclick="location = 'http://leobabyshop.1step.online/'">
+        </div>
+        <img src="images-1/logo.jpg" alt="logo" class="logo">
+        <div class="title">Розыгрыш призов для участников конкурса</div>
+    </header>
+    <div id="playground">
+        <div id="roulette-container">
+            <div id="roulette" class="rot"></div>
+        </div>
+        <div class="win-message">Вы выиграли этот приз! Напишите организатору, чтобы забрать его.</div>
+    </div>
+    <footer>
+        &copy; 2018
+    </footer>
+</section>
+</body>
+</html>

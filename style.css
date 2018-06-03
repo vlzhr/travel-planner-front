@@ -1,0 +1,162 @@
+:root {
+    --clickOn: 0deg;
+    --spin: 360deg;
+    --interval: 4s;
+}
+
+#playground {
+    margin: 50px auto;
+    position: relative;
+    width: 550px;
+    height: 550px;
+}
+
+#playground * {
+    position: absolute;
+}
+
+#roulette-container {
+    margin: 0px;
+}
+
+#roulette {
+    display: none;
+    content: url("http://www.photoshop-work.ru/images/8/13.jpg");
+    margin: 200px 180px;
+    width: 160px;
+}
+
+#runner {
+    cursor: pointer;
+    content: url("button.png");
+    /*url("https://static3.depositphotos.com/1000363/104/i/950/depositphotos_1045246-stock-photo-go-button.jpg")*/
+    margin: 195px;
+    width: 160px;
+}
+
+@keyframes end-spin {
+    from {transform:rotate(var(--clickOn));}
+    to {transform:rotate(var(--spin));}
+}
+
+@-webkit-keyframes end-spin {
+    from {-webkit-transform:rotate(var(--clickOn));}
+    to {
+        -webkit-transform:rotate(var(--spin));
+    }
+}
+
+@keyframes spin {
+    from {transform:rotate(0deg);}
+    to {transform:rotate(359deg);}
+}
+
+@-webkit-keyframes spin {
+    from {-webkit-transform:rotate(0deg);}
+    to {
+        -webkit-transform:rotate(359deg);
+    }
+}
+
+
+
+#roulette {
+
+}
+
+.spinning {
+    animation: spin .7s linear infinite;
+    -webkit-animation: spin .7s linear infinite;
+}
+
+.finishing {
+    animation: end-spin var(--interval) ease-out 1;
+    -webkit-animation: end-spin var(--interval) ease-out 1;
+    transform: rotate(var(--spin));
+    -webkit-transform: rotate(var(--spin));
+}
+
+.wins {
+    transition: width ease-in 2s, z-index ease-in 2s, top linear 2s, left linear 2s;
+    /*-webkit-transition-delay: 4s;
+    -webkit-transition-timing-function: ease-in;
+    -webkit-transition: width, z-index, top, left;*/
+    position: absolute;
+    left: 125px !important;
+    top: 120px !important;
+    z-index: 99;
+    width: 300px !important;
+}
+.wins::after {
+    content: "Вы выиграли этот приз. Свяжитесь с организатором для получения!";
+    display: block;
+    background: white;
+    padding: 12px;
+    clear: both;
+}
+
+.win-message {
+    position: absolute;
+    display: none;
+    padding: 20px 12px;
+    left: 110px;
+    width: 320px;
+    box-sizing: border-box;
+    text-align: center;
+    background: white;
+    padding-top: 232px;
+    top: 115px !important;
+    z-index: 98;
+    border-radius: 10px;
+    border: dotted 1px #654834;
+}
+
+.item {
+    width: 100px;
+}
+
+
+body {
+    background-image: linear-gradient(to top, #fff 0%, #fff 0%, #FC9C4F 30%, #fff 35%, #fff);
+}
+
+
+
+
+.rules-message {
+    position: absolute;
+    left: 30px;
+    padding: 30px;
+    padding-top: 60px;
+    right: 30px;
+    top: 20px;
+    height: 300px;
+    border-radius: 10px;
+    border: 3px dotted #ccc;
+    background: white;
+    background-image: url("images-1/bg.png") no-repeat;
+    background-size: 100%;
+}
+
+.rules-message p {
+    position: relative !important;
+}
+
+.rules-closer {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    content: url("images-1/close.png");
+    cursor: pointer;
+}
+
+.close-text {
+    position: absolute;
+    bottom: 20px;
+    box-sizing: border-box;
+    width: 100%;
+    text-align: center;
+    left: 0px;
+    color: indianred;
+    cursor: pointer;
+}

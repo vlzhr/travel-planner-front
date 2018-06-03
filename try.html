@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Practicing</title>
+    <style>
+        @keyframes spin {
+            from {transform:rotate(0deg);}
+            to {transform:rotate(var(--spin));}
+        }
+        @-webkit-keyframes spin {
+            from { -webkit-transform:rotate(0deg); }
+            to {
+                -webkit-transform:rotate(var(--spin));
+            }
+        }
+        :root {
+            --spin: 360deg;
+            --interval: 1s;
+        }
+        .spinning {
+            animation: spin var(--interval) ease-in-out 1;
+            -webkit-animation: spin var(--interval) ease-in-out 1;
+            transform: rotate(var(--spin));
+            -webkit-transform: rotate(var(--spin));
+        }
+
+    </style>
+</head>
+<body>
+    <section>
+        <img onclick="document.querySelector('img').classList.add('spinning')" src="https://www.w3schools.com/howto/img_fjords.jpg" alt="">
+    </section>
+</body>
+</html>
