@@ -1,56 +1,108 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Global site tag (gtag.js) - Google Analytics -->
-    <script async src="https://www.googletagmanager.com/gtag/js?id=UA-48015212-10"></script>
-    <script>
-        window.dataLayer = window.dataLayer || [];
-        function gtag(){dataLayer.push(arguments);}
-        gtag('js', new Date());
+	<meta charset="UTF-8">
+	<title>Travel Planner</title>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<link href="https://fonts.googleapis.com/css?family=Roboto:300,400&amp;subset=cyrillic" rel="stylesheet">
+	<script src="cookie.js"></script>
+	<script src="https://vk.com/js/api/openapi.js?150" type="text/javascript"></script>
+	<!--<script src="all.js">/* changeSection */</script>
+	<script src="field.js">/* --canvasFunctions */</script> 
+	<script src="vk.js">/* --vkFoo */</script> 
+	<script src="0.js">/* onLoaded */</script>
+	<script src="1.js">/* onAuth */</script> 
+	<script src="2.js">/* onProjectChoice */</script> 
+	<script src="3.js">/* --pointChanges */</script> 
+	<link rel="stylesheet" href="1.css">
+	<link rel="stylesheet" href="2.css">-->
+	<style>
+		body {
+			margin: 0px;
+			font-family: 'Open Sans', sans-serif;
+			background: #DE6262;  /* fallback for old browsers */
+			background: -webkit-linear-gradient(to bottom, #FFB88C, #DE6262);  /* Chrome 10-25, Safari 5.1-6 */
+			background: linear-gradient(to bottom, #FFB88C, #DE6262); /* W3C, IE 10+/ Edge, Firefox 16+, Chrome 26+, Opera 12+, Safari 7+ */
+			background-size: cover;
+		}
+		section {
+			max-width: 500px;
+			padding: 35px ;
+			margin: 20px auto;
+		}
+		h1 {
+			color: #07234E;
+			margin-bottom: 5px;
+		}
+		.subtitle {
+			color: rgba(7, 35, 78, 0.8);
+			margin-bottom: 30px;
+		}
 
-        gtag('config', 'UA-48015212-10');
-    </script>
+		.wo-auth, .about-auth {
+			color: #07234E;
+			margin-bottom: 30px;
+		}
+		.wo-auth a {
+			/*text-decoration: none;*/
+			color: #333333;
+		}
+		.wo-auth a:hover {
+			color: #83b8a8;
+		}
+		.image-view {
+			width: 300px;
+			padding: 5px;
+			border: dotted #83b8a8 1px;
+			margin: 20px auto;
+			border-radius: 20px;
+		}
+		img {
+			border-radius: 20px;
+			width: 300px;
+		}
+		#vk_auth {
+			width: 300px;
+			margin: 10px auto;
+		}
 
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Розыгрыш призов для участников GiveAway</title>
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
-    <link rel="stylesheet" href="page-style.css">
-    <link rel="stylesheet" href="index-style.css">
+	</style>
 </head>
 <body>
-    <section>
-        <header>
-            <div class="shares">
-                <div class="share-button"><a href="https://www.facebook.com/leobabybrand/"><i class="fa fa-facebook"></i></a></div>
-                <div class="share-button"><a href="https://vk.com/vk.leobaby"><i class="fa fa-vk"></i></a></div>
-                <div class="share-button"><a href="https://www.instagram.com/leobabyshop"><i class="fa fa-instagram"></i></a></div>
-                <img class="share-button" style="width:20px" src="images-1/logo.jpg" onclick="location = 'http://leobabyshop.1step.online/'">
-            </div>
-            <img src="images-1/logo.jpg" alt="logo" class="logo">
-            <div class="title">Розыгрыш призов для участников конкурса</div>
-        </header>
+	
+	<section>
 
-        <div class="number-form">
-            <p>Пожалуйста, введите Ваш номер!</p>
-            <form action="play.html">
-                <input type="text" name="q" placeholder="Номер">
-                <input type="submit">
-            </form>
-        </div>
-        
-        <div class="images-raw-container">
-            <div class="images-raw">
-                <div class="index-image"><img src="images-1/1-min.jpg" alt="ребенок"></div>
-                <div class="index-image"><img src="images-1/2-min.jpg" alt="ребенок"></div>
-                <div class="index-image"><img src="images-1/3.1-min.jpg" alt="ребенок"><img src="images-1/3.2-min.jpg" alt="ребенок"></div>
-                <div class="index-image"><img src="images-1/4-min.jpg" alt="ребенок"></div>
-                <div class="index-image"><img src="images-1/5-min.jpg" alt="ребенок"></div>
-            </div>
-        </div>
-        <footer>
-            &copy; 2018
-        </footer>
-    </section>
+		<h1>Travel Planner</h1>
+		<div class="subtitle">
+			Make your trip route discussions visually clear. Use the chart.
+		</div>
+
+		<div class="image-view">
+			<img src="screen.png" alt="screen">
+		</div>
+		
+		<div class="wo-auth">
+			Try it without registration: <a href="javascript: onAuth()">let's start!</a>
+		</div>
+		<div class="about-auth">
+			Or login and do it together with your trip partners! Just use the VK form below:
+			<div id="vk_auth"></div>
+		</div>
+
+	</section>
+
 </body>
+<script>
+    function onAuth(req={"uid": 0, "first_name": "Неизвестный", "last_name": "Посетитель", "photo": "https://png.icons8.com/dotty/50/000000/administrator-male.png"}) {
+        document.cookie = "ui="+req.uid;
+        document.cookie = "first_name="+req.first_name;
+        document.cookie = "last_name="+req.last_name;
+        document.cookie = "photo="+req.photo;
+
+		location = "choose-project.html";
+    }
+    document.querySelector("body").style.height = window.innerHeight + "px";
+    VK.init({ apiId: 5847252 });
+    VK.Widgets.Auth('vk_auth', {"onAuth": onAuth});
+</script>
 </html>
